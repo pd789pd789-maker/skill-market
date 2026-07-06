@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-07-06T03:36:57.611Z",
+  "stale": true,
+  "warning": "部分 GitHub 源同步失败，当前页面回退到最近一次成功快照。",
+  "sources": [
+    {
+      "id": "antigravity-json",
+      "label": "Antigravity JSON Catalog",
+      "sourceRepo": "sickn33/antigravity-awesome-skills",
+      "entryCount": 6,
+      "status": "fallback",
+      "updatedAt": "2026-07-06T03:36:57.611Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "id": "anthropics-manifest",
+      "label": "Anthropic Skill Manifest",
+      "sourceRepo": "anthropics/skills",
+      "entryCount": 5,
+      "status": "fallback",
+      "updatedAt": "2026-07-06T03:36:57.611Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "id": "openai-plugin-manifest",
+      "label": "OpenAI Plugin Manifest",
+      "sourceRepo": "openai/plugins",
+      "entryCount": 4,
+      "status": "fallback",
+      "updatedAt": "2026-07-06T03:36:57.611Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "id": "voltagent-readme",
+      "label": "VoltAgent README Catalog",
+      "sourceRepo": "VoltAgent/awesome-agent-skills",
+      "entryCount": 3,
+      "status": "fallback",
+      "updatedAt": "2026-07-06T03:36:57.611Z",
+      "error": "The operation was aborted due to timeout"
+    },
+    {
+      "id": "composio-readme",
+      "label": "Composio README Catalog",
+      "sourceRepo": "ComposioHQ/awesome-codex-skills",
+      "entryCount": 3,
+      "status": "fallback",
+      "updatedAt": "2026-07-06T03:36:57.611Z",
+      "error": "The operation was aborted due to timeout"
+    }
+  ]
+}

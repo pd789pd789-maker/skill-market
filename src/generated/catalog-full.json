@@ -1,0 +1,546 @@
+[
+  {
+    "slug": "antigravity-awesome-skills",
+    "kind": "collection",
+    "title": "Antigravity Awesome Skills",
+    "summary": "面向 Codex、Claude、Cursor、Gemini 的大型可安装 Skill 库，也是首页默认主 Hero 的热门来源。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini",
+      "multi-agent"
+    ],
+    "tags": [
+      "awesome",
+      "catalog",
+      "skills",
+      "cross-platform"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-05T12:00:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "typescript-code-optimizer",
+    "kind": "skill",
+    "title": "TypeScript 代码优化器",
+    "summary": "智能分析并优化 TypeScript 代码、类型体操和性能敏感实现，适合日常重构与审查。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/typescript-code-optimizer",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini"
+    ],
+    "tags": [
+      "typescript",
+      "code-analysis",
+      "development"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-04T10:00:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "python-unit-test-generator",
+    "kind": "skill",
+    "title": "Python 单元测试生成器",
+    "summary": "根据现有模块自动生成覆盖边界场景的 pytest 测试用例，适合补齐质量保障。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/python-unit-test-generator",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini"
+    ],
+    "tags": [
+      "python",
+      "testing",
+      "development"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-03T08:30:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "git-automation-assistant",
+    "kind": "skill",
+    "title": "Git 智能助手",
+    "summary": "自动清理提交历史、帮助生成规范 commit message，并给出低风险的 Git 操作建议。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/git-automation-assistant",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor"
+    ],
+    "tags": [
+      "git",
+      "development",
+      "automation"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-02T08:30:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "api-doc-builder",
+    "kind": "skill",
+    "title": "API 文档生成器",
+    "summary": "从代码和接口描述中自动生成更清晰的 API 文档、示例和字段说明。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-doc-builder",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini"
+    ],
+    "tags": [
+      "docs",
+      "api",
+      "knowledge"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-01T08:30:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "sql-query-optimizer",
+    "kind": "skill",
+    "title": "SQL 查询优化器",
+    "summary": "聚焦 SQL、索引和数据模型层面的查询性能优化，适合数据分析与后端项目。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sql-query-optimizer",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor"
+    ],
+    "tags": [
+      "sql",
+      "data",
+      "analysis"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-06-30T08:30:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "voltagent-awesome-agent-skills",
+    "kind": "collection",
+    "title": "Awesome Agent Skills",
+    "summary": "由 VoltAgent 维护的跨平台代理技能大合集，强调真实团队维护而非批量生成内容。",
+    "sourceRepo": "VoltAgent/awesome-agent-skills",
+    "repoUrl": "https://github.com/VoltAgent/awesome-agent-skills",
+    "downloadUrl": "https://github.com/VoltAgent/awesome-agent-skills",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini",
+      "multi-agent"
+    ],
+    "tags": [
+      "awesome",
+      "curated",
+      "cross-platform"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": 27391,
+    "updatedAt": "2026-07-04T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "composio-awesome-codex-skills",
+    "kind": "collection",
+    "title": "Awesome Codex Skills",
+    "summary": "偏向 Codex 使用场景的实用 Skill 汇编，含安装脚本与真实工作流示例。",
+    "sourceRepo": "ComposioHQ/awesome-codex-skills",
+    "repoUrl": "https://github.com/ComposioHQ/awesome-codex-skills",
+    "downloadUrl": "https://github.com/ComposioHQ/awesome-codex-skills",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "awesome",
+      "codex",
+      "skills"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": 14612,
+    "updatedAt": "2026-07-01T09:00:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "composio-meeting-notes-actions",
+    "kind": "skill",
+    "title": "meeting-notes-and-actions",
+    "summary": "帮助从会议内容中提取行动项和结构化纪要，适合 Codex 自动化工作流。",
+    "sourceRepo": "ComposioHQ/awesome-codex-skills",
+    "repoUrl": "https://github.com/ComposioHQ/awesome-codex-skills",
+    "downloadUrl": "https://github.com/ComposioHQ/awesome-codex-skills/tree/master/meeting-notes-and-actions",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "productivity",
+      "notes",
+      "codex"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": 14612,
+    "updatedAt": "2026-06-21T09:00:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "anthropics-skills",
+    "kind": "collection",
+    "title": "Anthropic Skills",
+    "summary": "Anthropic 官方公开的 Agent Skills 仓库，聚焦 Claude 工作流和文档、创作、前端等常用任务。",
+    "sourceRepo": "anthropics/skills",
+    "repoUrl": "https://github.com/anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "official",
+      "claude",
+      "skills"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-28T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "anthropics-docx",
+    "kind": "skill",
+    "title": "anthropics/docx",
+    "summary": "创建、编辑与分析 Word 文档的官方 Skill，适合文档自动化与报告整理。",
+    "sourceRepo": "anthropics/skills",
+    "repoUrl": "https://github.com/anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/docx",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "docs",
+      "office",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-28T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "anthropics-pptx",
+    "kind": "skill",
+    "title": "anthropics/pptx",
+    "summary": "用于创建、编辑与分析 PowerPoint 演示文稿的官方 Skill。",
+    "sourceRepo": "anthropics/skills",
+    "repoUrl": "https://github.com/anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/pptx",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "office",
+      "presentation",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-27T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "openai-plugins",
+    "kind": "collection",
+    "title": "OpenAI Plugins",
+    "summary": "OpenAI 官方 Codex 插件示例集合，覆盖设计、部署、建站和多类工作流。",
+    "sourceRepo": "openai/plugins",
+    "repoUrl": "https://github.com/openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "official",
+      "codex",
+      "plugins"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-27T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "openai-figma-plugin",
+    "kind": "plugin",
+    "title": "Figma",
+    "summary": "OpenAI 官方 Figma 插件，支持设计实现、Code Connect 与设计系统工作流。",
+    "sourceRepo": "openai/plugins",
+    "repoUrl": "https://github.com/openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins/tree/main/plugins/figma",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "design",
+      "plugin",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-27T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "anthropics-pdf",
+    "kind": "skill",
+    "title": "anthropics/pdf",
+    "summary": "提取文本、创建 PDF 与处理表单的官方 Skill，适合法务和资料处理场景。",
+    "sourceRepo": "anthropics/skills",
+    "repoUrl": "https://github.com/anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/pdf",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "docs",
+      "pdf",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-26T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "openai-build-web-apps",
+    "kind": "plugin",
+    "title": "Build Web Apps",
+    "summary": "OpenAI 官方建站插件，聚焦前端设计实现、部署、支付与数据库相关工作流。",
+    "sourceRepo": "openai/plugins",
+    "repoUrl": "https://github.com/openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins/tree/main/plugins/build-web-apps",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "frontend",
+      "plugin",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-26T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "anthropics-skill-creator",
+    "kind": "skill",
+    "title": "anthropics/skill-creator",
+    "summary": "帮助用户创建、优化与评估 Skill 的官方指南，适合作为技能工程模板。",
+    "sourceRepo": "anthropics/skills",
+    "repoUrl": "https://github.com/anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "skills",
+      "official",
+      "development"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-25T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "openai-netlify",
+    "kind": "plugin",
+    "title": "Netlify",
+    "summary": "OpenAI 官方插件示例，适合把静态站与前端项目快速发布到 Netlify。",
+    "sourceRepo": "openai/plugins",
+    "repoUrl": "https://github.com/openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins/tree/main/plugins/netlify",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "deployment",
+      "plugin",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-25T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "voltagent-testmu-api-skill",
+    "kind": "skill",
+    "title": "testmu-ai/api-skill",
+    "summary": "面向 REST、GraphQL 与 gRPC 的 API 测试技能包，适合自动化测试团队。",
+    "sourceRepo": "VoltAgent/awesome-agent-skills",
+    "repoUrl": "https://github.com/LambdaTest/agent-skills",
+    "downloadUrl": "https://github.com/LambdaTest/agent-skills/tree/main/api-skill",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini",
+      "multi-agent"
+    ],
+    "tags": [
+      "testing",
+      "api",
+      "community"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-24T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "voltagent-testmu-cicd-pipeline-skill",
+    "kind": "skill",
+    "title": "testmu-ai/cicd-pipeline-skill",
+    "summary": "帮助生成 GitHub Actions、Jenkins、GitLab CI 等测试流水线配置。",
+    "sourceRepo": "VoltAgent/awesome-agent-skills",
+    "repoUrl": "https://github.com/LambdaTest/agent-skills",
+    "downloadUrl": "https://github.com/LambdaTest/agent-skills/tree/main/cicd-pipeline-skill",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini",
+      "multi-agent"
+    ],
+    "tags": [
+      "deployment",
+      "testing",
+      "community"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-23T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  },
+  {
+    "slug": "bernstein",
+    "kind": "collection",
+    "title": "Bernstein",
+    "summary": "多代理协作器，支持在隔离 worktree 中并行运行 Codex agent。",
+    "sourceRepo": "ComposioHQ/awesome-codex-skills",
+    "repoUrl": "https://github.com/chernistry/bernstein",
+    "downloadUrl": "https://github.com/chernistry/bernstein",
+    "platforms": [
+      "codex",
+      "multi-agent"
+    ],
+    "tags": [
+      "multi-agent",
+      "automation",
+      "codex"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-22T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ]
+  }
+]

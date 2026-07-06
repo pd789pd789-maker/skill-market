@@ -1,0 +1,389 @@
+[
+  {
+    "slug": "typescript-code-optimizer",
+    "kind": "skill",
+    "title": "TypeScript 代码优化器",
+    "summary": "智能分析并优化 TypeScript 代码、类型体操和性能敏感实现，适合日常重构与审查。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/typescript-code-optimizer",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini"
+    ],
+    "tags": [
+      "typescript",
+      "code-analysis",
+      "development"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-04T10:00:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ],
+    "searchText": "typescript 代码优化器 智能分析并优化 typescript 代码、类型体操和性能敏感实现，适合日常重构与审查。 sickn33/antigravity-awesome-skills typescript code-analysis development codex claude cursor gemini"
+  },
+  {
+    "slug": "python-unit-test-generator",
+    "kind": "skill",
+    "title": "Python 单元测试生成器",
+    "summary": "根据现有模块自动生成覆盖边界场景的 pytest 测试用例，适合补齐质量保障。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/python-unit-test-generator",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini"
+    ],
+    "tags": [
+      "python",
+      "testing",
+      "development"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-03T08:30:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ],
+    "searchText": "python 单元测试生成器 根据现有模块自动生成覆盖边界场景的 pytest 测试用例，适合补齐质量保障。 sickn33/antigravity-awesome-skills python testing development codex claude cursor gemini"
+  },
+  {
+    "slug": "git-automation-assistant",
+    "kind": "skill",
+    "title": "Git 智能助手",
+    "summary": "自动清理提交历史、帮助生成规范 commit message，并给出低风险的 Git 操作建议。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/git-automation-assistant",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor"
+    ],
+    "tags": [
+      "git",
+      "development",
+      "automation"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-02T08:30:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "git 智能助手 自动清理提交历史、帮助生成规范 commit message，并给出低风险的 git 操作建议。 sickn33/antigravity-awesome-skills git development automation codex claude cursor"
+  },
+  {
+    "slug": "api-doc-builder",
+    "kind": "skill",
+    "title": "API 文档生成器",
+    "summary": "从代码和接口描述中自动生成更清晰的 API 文档、示例和字段说明。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-doc-builder",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini"
+    ],
+    "tags": [
+      "docs",
+      "api",
+      "knowledge"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-07-01T08:30:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "api 文档生成器 从代码和接口描述中自动生成更清晰的 api 文档、示例和字段说明。 sickn33/antigravity-awesome-skills docs api knowledge codex claude cursor gemini"
+  },
+  {
+    "slug": "sql-query-optimizer",
+    "kind": "skill",
+    "title": "SQL 查询优化器",
+    "summary": "聚焦 SQL、索引和数据模型层面的查询性能优化，适合数据分析与后端项目。",
+    "sourceRepo": "sickn33/antigravity-awesome-skills",
+    "downloadUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sql-query-optimizer",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor"
+    ],
+    "tags": [
+      "sql",
+      "data",
+      "analysis"
+    ],
+    "officialStatus": "community",
+    "deprecated": false,
+    "stars": 42446,
+    "updatedAt": "2026-06-30T08:30:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "sql 查询优化器 聚焦 sql、索引和数据模型层面的查询性能优化，适合数据分析与后端项目。 sickn33/antigravity-awesome-skills sql data analysis codex claude cursor"
+  },
+  {
+    "slug": "composio-meeting-notes-actions",
+    "kind": "skill",
+    "title": "meeting-notes-and-actions",
+    "summary": "帮助从会议内容中提取行动项和结构化纪要，适合 Codex 自动化工作流。",
+    "sourceRepo": "ComposioHQ/awesome-codex-skills",
+    "downloadUrl": "https://github.com/ComposioHQ/awesome-codex-skills/tree/master/meeting-notes-and-actions",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "productivity",
+      "notes",
+      "codex"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": 14612,
+    "updatedAt": "2026-06-21T09:00:00.000Z",
+    "installMethods": [
+      "installer-script",
+      "copy-folder"
+    ],
+    "searchText": "meeting-notes-and-actions 帮助从会议内容中提取行动项和结构化纪要，适合 codex 自动化工作流。 composiohq/awesome-codex-skills productivity notes codex codex"
+  },
+  {
+    "slug": "anthropics-docx",
+    "kind": "skill",
+    "title": "anthropics/docx",
+    "summary": "创建、编辑与分析 Word 文档的官方 Skill，适合文档自动化与报告整理。",
+    "sourceRepo": "anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/docx",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "docs",
+      "office",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-28T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "anthropics/docx 创建、编辑与分析 word 文档的官方 skill，适合文档自动化与报告整理。 anthropics/skills docs office official claude"
+  },
+  {
+    "slug": "anthropics-pptx",
+    "kind": "skill",
+    "title": "anthropics/pptx",
+    "summary": "用于创建、编辑与分析 PowerPoint 演示文稿的官方 Skill。",
+    "sourceRepo": "anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/pptx",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "office",
+      "presentation",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-27T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "anthropics/pptx 用于创建、编辑与分析 powerpoint 演示文稿的官方 skill。 anthropics/skills office presentation official claude"
+  },
+  {
+    "slug": "openai-figma-plugin",
+    "kind": "plugin",
+    "title": "Figma",
+    "summary": "OpenAI 官方 Figma 插件，支持设计实现、Code Connect 与设计系统工作流。",
+    "sourceRepo": "openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins/tree/main/plugins/figma",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "design",
+      "plugin",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-27T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ],
+    "searchText": "figma openai 官方 figma 插件，支持设计实现、code connect 与设计系统工作流。 openai/plugins design plugin official codex"
+  },
+  {
+    "slug": "anthropics-pdf",
+    "kind": "skill",
+    "title": "anthropics/pdf",
+    "summary": "提取文本、创建 PDF 与处理表单的官方 Skill，适合法务和资料处理场景。",
+    "sourceRepo": "anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/pdf",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "docs",
+      "pdf",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-26T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "anthropics/pdf 提取文本、创建 pdf 与处理表单的官方 skill，适合法务和资料处理场景。 anthropics/skills docs pdf official claude"
+  },
+  {
+    "slug": "openai-build-web-apps",
+    "kind": "plugin",
+    "title": "Build Web Apps",
+    "summary": "OpenAI 官方建站插件，聚焦前端设计实现、部署、支付与数据库相关工作流。",
+    "sourceRepo": "openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins/tree/main/plugins/build-web-apps",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "frontend",
+      "plugin",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-26T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ],
+    "searchText": "build web apps openai 官方建站插件，聚焦前端设计实现、部署、支付与数据库相关工作流。 openai/plugins frontend plugin official codex"
+  },
+  {
+    "slug": "anthropics-skill-creator",
+    "kind": "skill",
+    "title": "anthropics/skill-creator",
+    "summary": "帮助用户创建、优化与评估 Skill 的官方指南，适合作为技能工程模板。",
+    "sourceRepo": "anthropics/skills",
+    "downloadUrl": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+    "platforms": [
+      "claude"
+    ],
+    "tags": [
+      "skills",
+      "official",
+      "development"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-25T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "anthropics/skill-creator 帮助用户创建、优化与评估 skill 的官方指南，适合作为技能工程模板。 anthropics/skills skills official development claude"
+  },
+  {
+    "slug": "openai-netlify",
+    "kind": "plugin",
+    "title": "Netlify",
+    "summary": "OpenAI 官方插件示例，适合把静态站与前端项目快速发布到 Netlify。",
+    "sourceRepo": "openai/plugins",
+    "downloadUrl": "https://github.com/openai/plugins/tree/main/plugins/netlify",
+    "platforms": [
+      "codex"
+    ],
+    "tags": [
+      "deployment",
+      "plugin",
+      "official"
+    ],
+    "officialStatus": "official",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-25T09:00:00.000Z",
+    "installMethods": [
+      "plugin-marketplace",
+      "copy-folder"
+    ],
+    "searchText": "netlify openai 官方插件示例，适合把静态站与前端项目快速发布到 netlify。 openai/plugins deployment plugin official codex"
+  },
+  {
+    "slug": "voltagent-testmu-api-skill",
+    "kind": "skill",
+    "title": "testmu-ai/api-skill",
+    "summary": "面向 REST、GraphQL 与 gRPC 的 API 测试技能包，适合自动化测试团队。",
+    "sourceRepo": "VoltAgent/awesome-agent-skills",
+    "downloadUrl": "https://github.com/LambdaTest/agent-skills/tree/main/api-skill",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini",
+      "multi-agent"
+    ],
+    "tags": [
+      "testing",
+      "api",
+      "community"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-24T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "testmu-ai/api-skill 面向 rest、graphql 与 grpc 的 api 测试技能包，适合自动化测试团队。 voltagent/awesome-agent-skills testing api community codex claude cursor gemini multi-agent"
+  },
+  {
+    "slug": "voltagent-testmu-cicd-pipeline-skill",
+    "kind": "skill",
+    "title": "testmu-ai/cicd-pipeline-skill",
+    "summary": "帮助生成 GitHub Actions、Jenkins、GitLab CI 等测试流水线配置。",
+    "sourceRepo": "VoltAgent/awesome-agent-skills",
+    "downloadUrl": "https://github.com/LambdaTest/agent-skills/tree/main/cicd-pipeline-skill",
+    "platforms": [
+      "codex",
+      "claude",
+      "cursor",
+      "gemini",
+      "multi-agent"
+    ],
+    "tags": [
+      "deployment",
+      "testing",
+      "community"
+    ],
+    "officialStatus": "curated",
+    "deprecated": false,
+    "stars": null,
+    "updatedAt": "2026-06-23T09:00:00.000Z",
+    "installMethods": [
+      "copy-folder"
+    ],
+    "searchText": "testmu-ai/cicd-pipeline-skill 帮助生成 github actions、jenkins、gitlab ci 等测试流水线配置。 voltagent/awesome-agent-skills deployment testing community codex claude cursor gemini multi-agent"
+  }
+]
