@@ -32,7 +32,11 @@ export function getCollectionEntry(slug: string): CatalogEntry | undefined {
 
 export function getCollectionMembers(sourceRepo: string): CatalogEntry[] {
   return getCatalog()
-    .filter((entry) => entry.kind !== "collection" && entry.sourceRepo === sourceRepo)
+    .filter(
+      (entry) =>
+        entry.kind !== "collection" &&
+        (entry.sourceRepos ?? [entry.sourceRepo]).includes(sourceRepo),
+    )
     .sort(
       (left, right) =>
         new Date(right.updatedAt).getTime() - new Date(left.updatedAt).getTime(),

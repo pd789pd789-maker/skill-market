@@ -23,7 +23,7 @@ describe("catalog source adapters", () => {
           category: "testing",
           name: "Test Skill",
           description: "Does a thing",
-          source: "community",
+          source: "https://github.com/example/skills/tree/main/skills/test-skill",
           date_added: "2026-07-01",
           plugin: {
             targets: { codex: "supported", claude: "supported" },
@@ -37,6 +37,9 @@ describe("catalog source adapters", () => {
     expect(entries[1]).toMatchObject({
       slug: "test-skill",
       sourceRepo: "sickn33/antigravity-awesome-skills",
+      sourceRepos: ["sickn33/antigravity-awesome-skills"],
+      repoUrl: "https://github.com/example/skills",
+      downloadUrl: "https://github.com/example/skills/tree/main/skills/test-skill",
       platforms: ["codex", "claude"],
     });
   });

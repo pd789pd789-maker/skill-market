@@ -35,6 +35,11 @@ export default async function SkillDetailPage({
 
   const related = getRelatedEntries(entry);
   const meta = getCatalogMeta();
+  const collectionSources = getCatalog().filter(
+    (item) =>
+      item.kind === "collection" &&
+      (entry.sourceRepos ?? [entry.sourceRepo]).includes(item.sourceRepo),
+  );
 
   return (
     <>
@@ -46,8 +51,15 @@ export default async function SkillDetailPage({
           <section className="rounded-[32px] border border-slate-200 bg-white p-8 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.16)]">
             <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
               <div className="max-w-3xl space-y-5">
-                <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
-                  {OFFICIAL_STATUS_LABELS[entry.officialStatus]}
+                <div className="flex flex-wrap gap-2">
+                  <div className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                    {OFFICIAL_STATUS_LABELS[entry.officialStatus]}
+                  </div>
+                  {entry.category ? (
+                    <div className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                      {entry.category}
+                    </div>
+                  ) : null}
                 </div>
                 <div className="space-y-3">
                   <h1 className="text-4xl font-black tracking-tight text-slate-950">
@@ -68,7 +80,11 @@ export default async function SkillDetailPage({
               </div>
 
               <div className="grid gap-4 rounded-[28px] border border-slate-200 bg-slate-50 p-5 sm:grid-cols-2 lg:min-w-[360px] lg:grid-cols-1">
-                <Metric title="来源仓库" value={entry.sourceRepo} />
+                <Metric title="原始仓库" value={getRepoLabel(entry.repoUrl)} />
+                <Metric
+                  title="收录来源"
+                  value={`${(entry.sourceRepos ?? [entry.sourceRepo]).length} 个合集`}
+                />
                 <Metric title="仓库热度" value={formatCompactNumber(entry.stars)} />
                 <Metric title="最近更新" value={formatRelativeDate(entry.updatedAt)} />
                 <Metric title="安装方式" value={entry.installMethods.length.toString()} />
@@ -83,7 +99,7 @@ export default async function SkillDetailPage({
                 className="inline-flex items-center gap-2 rounded-2xl bg-blue-600 px-5 py-3 text-sm font-bold text-white"
               >
                 <Download className="h-4 w-4" />
-                下载 / 打开来源
+                下载 / 打开原始来源
               </a>
               <a
                 href={entry.repoUrl}
@@ -91,7 +107,7 @@ export default async function SkillDetailPage({
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700"
               >
-                查看 GitHub
+                查看原始仓库
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
@@ -134,7 +150,7 @@ export default async function SkillDetailPage({
                         {INSTALL_METHOD_LABELS[method]}
                       </p>
                       <pre className="mt-3 overflow-x-auto rounded-[18px] bg-white p-4 text-sm leading-7 text-slate-700 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.18)]">
-                        <code>{exampleInstallSnippet(entry.slug, method)}</code>
+                        <code>{exampleInstallSnippet(entry, method)}</code>
                       </pre>
                     </div>
                   ))}
@@ -143,6 +159,21 @@ export default async function SkillDetailPage({
             </div>
 
             <section className="space-y-6">
+              <div className="rounded-[30px] border border-slate-200 bg-white p-6">
+                <p className="text-sm font-semibold text-slate-500">收录来源</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {collectionSources.map((collection) => (
+                    <Link
+                      key={collection.slug}
+                      href={`/collections/${collection.slug}`}
+                      className="rounded-full bg-slate-100 px-3 py-1.5 text-sm font-semibold text-slate-700 transition hover:bg-blue-50 hover:text-blue-700"
+                    >
+                      {collection.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <div className="rounded-[30px] border border-slate-200 bg-white p-6">
                 <p className="text-sm font-semibold text-slate-500">标签</p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -192,15 +223,26 @@ function Metric({ title, value }: { title: string; value: string }) {
   );
 }
 
-function exampleInstallSnippet(slug: string, method: string) {
+function getRepoLabel(url: string): string {
+  const match = url.match(/github\.com\/([^/]+\/[^/#?]+)/i);
+  return match?.[1] ?? url;
+}
+
+function exampleInstallSnippet(
+  entry: {
+    repoUrl: string;
+    downloadUrl: string;
+  },
+  method: string,
+) {
   switch (method) {
     case "plugin-marketplace":
-      return `# 在 Codex 插件市场或本地插件目录中启用\ncodex plugins add ${slug}`;
+      return `# 在 Codex 插件管理中导入插件\nopen ${entry.downloadUrl}\n# 按原始仓库说明启用插件`;
     case "installer-script":
-      return `npx ai-skill-hub@latest install ${slug}`;
+      return `# 先查看原始仓库提供的安装脚本\nopen ${entry.repoUrl}\n# 按 README 中的 npx / uvx / python 命令安装`;
     case "github-release":
-      return `# 从 GitHub Release 下载归档包\nopen <release-url>`;
+      return `# 从 GitHub Release 下载归档包\nopen ${entry.downloadUrl}`;
     default:
-      return `mkdir -p "$CODEX_HOME/skills"\ncp -R ./${slug} "$CODEX_HOME/skills/${slug}"`;
+      return `# 打开原始 Skill 目录\nopen ${entry.downloadUrl}\n# 按仓库结构复制到本地 skills 目录`;
   }
 }

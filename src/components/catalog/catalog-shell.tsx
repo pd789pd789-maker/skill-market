@@ -115,7 +115,7 @@ function getCompatibilityRows(entries: SearchEntry[]) {
 }
 
 function getPrimaryTag(entry: SearchEntry) {
-  return getPrimaryCategory(entry.tags);
+  return entry.category ?? getPrimaryCategory(entry.tags);
 }
 
 export function CatalogShell({
@@ -137,13 +137,8 @@ export function CatalogShell({
     sortMode,
   );
   const facets = getFacetSummary(entries);
-  const topTags = [...facets.byTag.entries()].sort((a, b) => b[1] - a[1]).slice(0, 7);
-  const sidebarCategories = [...facets.byTag.entries()]
-    .map(([tag, count]) => [mapTagToCategory(tag), count] as const)
-    .reduce((map, [category, count]) => {
-      map.set(category, (map.get(category) ?? 0) + count);
-      return map;
-    }, new Map<string, number>());
+  const topTags = [...facets.byCategory.entries()].sort((a, b) => b[1] - a[1]).slice(0, 7);
+  const sidebarCategories = facets.byCategory;
   const sidebarSources = [...facets.bySource.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
   const hotCollection =
     collections.find((entry) => entry.sourceRepo === FEATURED_SOURCE_REPO) ??
@@ -153,7 +148,7 @@ export function CatalogShell({
   const recentRows = sortEntries(filtered, "updated").slice(0, 5);
   const compatibilityRows = getCompatibilityRows(entries);
   const hotCollectionMemberCount = entries.filter(
-    (entry) => entry.sourceRepo === hotCollection?.sourceRepo,
+    (entry) => (entry.sourceRepos ?? [entry.sourceRepo]).includes(hotCollection?.sourceRepo ?? ""),
   ).length;
 
   function updateFilters(patch: Partial<BrowseFilters>) {
@@ -358,7 +353,7 @@ export function CatalogShell({
                       onClick={() => updateFilters({ tag })}
                       className="rounded-full border border-slate-200 bg-white px-3 py-1.5 transition hover:border-blue-200 hover:text-blue-700"
                     >
-                      {mapTagToCategory(tag)}
+                      {tag}
                     </button>
                   ))}
                 </div>

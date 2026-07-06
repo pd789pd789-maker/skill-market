@@ -284,18 +284,71 @@ const CAPABILITY_PROFILES: CapabilityProfile[] = [
   },
 ];
 
+const PROFILE_CATEGORIES: Record<string, string> = {
+  "meeting-notes": "沟通与协作",
+  docx: "文档与办公",
+  documentation: "文档与办公",
+  pptx: "文档与办公",
+  pdf: "文档与办公",
+  spreadsheet: "文档与办公",
+  "creative-design": "设计与内容",
+  figma: "设计与内容",
+  frontend: "前端与网页",
+  "api-docs": "API 与集成",
+  "api-test": "API 与集成",
+  "api-integration": "API 与集成",
+  testing: "测试与质量",
+  typescript: "前端与网页",
+  python: "开发与数据",
+  git: "开发协作",
+  sql: "数据与后端",
+  cicd: "运维与部署",
+  netlify: "运维与部署",
+  browser: "浏览器与自动化",
+  "multi-agent": "Agent 工作流",
+  communications: "沟通与协作",
+  "skill-creator": "Agent 工作流",
+  security: "安全与审计",
+  content: "设计与内容",
+  automation: "自动化工作流",
+};
+
+const GENERIC_CATEGORY_MAP: Record<string, string> = {
+  开发效率: "开发协作",
+  代码生成: "开发协作",
+  代码分析: "测试与质量",
+  "测试与质量": "测试与质量",
+  "文档与知识": "文档与办公",
+  "数据与模型": "开发与数据",
+  "运维与部署": "运维与部署",
+  "设计与内容": "设计与内容",
+  生产力工具: "文档与办公",
+  "安全与审计": "安全与审计",
+  官方能力: "Agent 工作流",
+  自动化工作流: "自动化工作流",
+  通用自动化: "自动化工作流",
+};
+
 const TOKEN_DICTIONARY: Record<string, string> = {
   actions: "行动项",
   agent: "智能体",
   api: "API 接口",
+  address: "处理",
+  algorithmic: "算法",
+  and: "与",
+  art: "艺术",
   assistant: "助手",
   audit: "审计",
   automation: "自动化",
   browser: "浏览器",
   build: "构建",
+  brand: "品牌",
   ci: "持续集成",
   cicd: "CI/CD",
+  canvas: "画布",
   claude: "Claude",
+  comments: "评论",
+  coauthoring: "协作写作",
   code: "代码",
   codex: "Codex",
   content: "内容",
@@ -314,6 +367,7 @@ const TOKEN_DICTIONARY: Record<string, string> = {
   gemini: "Gemini",
   git: "Git",
   github: "GitHub",
+  guidelines: "规范",
   image: "图像",
   integration: "集成",
   meeting: "会议",
@@ -383,6 +437,28 @@ function localizeEmbeddedEnglish(input: string): string {
     .trim();
 }
 
+function isSignalTag(tag: string): boolean {
+  const lower = tag.toLowerCase();
+  if (!lower) {
+    return false;
+  }
+
+  if (
+    lower.includes("/") ||
+    lower.includes(".") ||
+    lower.startsWith("http") ||
+    ["official", "community", "curated", "deprecated", "anthropic", "openai"].includes(lower)
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function getSignalTags(entry: CatalogEntry): string[] {
+  return entry.tags.filter(isSignalTag);
+}
+
 function pickBrand(rawTitle: string, sourceRepo: string): string | null {
   const explicitBrand = rawTitle.trim().match(/^[A-Z][A-Za-z0-9.+-]*(?:\s+[A-Z][A-Za-z0-9.+-]*)?$/);
   if (explicitBrand) {
@@ -415,14 +491,56 @@ function buildProfileTitle(
   return title;
 }
 
+function formatSpecificName(originalTitle: string): string {
+  const segments = originalTitle.split("/").filter(Boolean);
+  const base = segments[segments.length - 1] ?? originalTitle;
+  const shouldIncludeOwner =
+    segments.length > 1 &&
+    (/^(skill|skills|plugin|plugins)$/i.test(base) ||
+      /-(skill|plugin)$/i.test(base));
+  const source = shouldIncludeOwner
+    ? segments.slice(-2).join("-")
+    : base;
+  const tokens = source.split(/[-_ ]+/).filter(Boolean);
+
+  return tokens
+    .slice(0, 6)
+    .map((token) => TOKEN_DICTIONARY[token.toLowerCase()] ?? token.replace(/^./, (char) => char.toUpperCase()))
+    .join(" ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildSpecificTitle(
+  entry: CatalogEntry,
+  originalTitle: string,
+  profile: CapabilityProfile | null,
+): string {
+  const suffix = entry.kind === "plugin" ? "插件" : "技能";
+  const specificName = formatSpecificName(originalTitle);
+
+  if (specificName) {
+    const cleaned = localizeEmbeddedEnglish(specificName);
+    if (cleaned.endsWith("技能") || cleaned.endsWith("插件")) {
+      return cleaned;
+    }
+    return `${cleaned}${suffix}`;
+  }
+
+  if (profile) {
+    return buildProfileTitle(entry, profile, pickBrand(originalTitle, entry.sourceRepo));
+  }
+
+  return buildFallbackTitle(entry);
+}
+
 function matchProfile(entry: CatalogEntry): CapabilityProfile | null {
   const titleHaystack = normalizeForMatch(
     [
       entry.title,
       entry.originalTitle,
       entry.path,
-      entry.sourceRepo,
-      ...entry.tags,
+      ...getSignalTags(entry),
     ]
       .filter(Boolean)
       .join(" "),
@@ -454,7 +572,7 @@ function matchProfile(entry: CatalogEntry): CapabilityProfile | null {
 
 function inferGenericCategory(entry: CatalogEntry): string {
   const haystack = normalizeForMatch(
-    [entry.title, entry.summary, ...entry.tags].join(" "),
+    [entry.title, entry.summary, ...getSignalTags(entry)].join(" "),
   );
 
   for (const [key, label] of Object.entries(KNOWN_CATEGORY_LABELS)) {
@@ -475,14 +593,24 @@ function inferGenericCategory(entry: CatalogEntry): string {
 }
 
 function buildFallbackTitle(entry: CatalogEntry): string {
-  const category = inferGenericCategory(entry);
-  const brand = pickBrand(entry.title, entry.sourceRepo);
+  const specificName = formatSpecificName(entry.originalTitle ?? entry.title);
   const suffix =
     entry.kind === "plugin"
       ? "插件"
       : entry.kind === "collection"
         ? "合集"
         : "技能";
+
+  if (specificName) {
+    const cleaned = localizeEmbeddedEnglish(specificName);
+    if (cleaned.endsWith("技能") || cleaned.endsWith("插件") || cleaned.endsWith("合集")) {
+      return cleaned;
+    }
+    return `${cleaned}${suffix}`;
+  }
+
+  const category = inferGenericCategory(entry);
+  const brand = pickBrand(entry.title, entry.sourceRepo);
 
   if (brand) {
     return `${brand} ${category}${suffix}`;
@@ -578,6 +706,22 @@ function buildLocalizedDescription(
   return [...new Set(sentences.map((sentence) => sentence.trim()).filter(Boolean))].join("");
 }
 
+function resolveCategory(entry: CatalogEntry, profile: CapabilityProfile | null): string {
+  if (entry.kind === "collection") {
+    return "合集与来源";
+  }
+
+  if (profile) {
+    return PROFILE_CATEGORIES[profile.id] ?? "自动化工作流";
+  }
+
+  if (entry.kind === "plugin") {
+    return "插件与工具集成";
+  }
+
+  return GENERIC_CATEGORY_MAP[inferGenericCategory(entry)] ?? "自动化工作流";
+}
+
 function localizeCollectionEntry(entry: CatalogEntry): CatalogEntry {
   const sourceSummary = entry.originalSummary ?? entry.summary;
   const preset = COLLECTION_LOCALIZATION[entry.sourceRepo];
@@ -596,6 +740,7 @@ function localizeCollectionEntry(entry: CatalogEntry): CatalogEntry {
     title: localizedTitle,
     summary: localizedSummary,
     description,
+    category: resolveCategory(entry, null),
     originalTitle: localizedTitle === entry.title ? entry.originalTitle : entry.title,
     originalSummary:
       localizedSummary === sourceSummary ? entry.originalSummary : sourceSummary,
@@ -611,13 +756,10 @@ function localizeSkillLikeEntry(entry: CatalogEntry): CatalogEntry {
     title: originalTitle,
     summary: originalSummary,
   });
-  const brand = pickBrand(originalTitle, entry.sourceRepo);
 
   const localizedTitle = hasChinese(originalTitle)
     ? localizeEmbeddedEnglish(originalTitle)
-    : profile
-      ? buildProfileTitle(entry, profile, brand)
-      : buildFallbackTitle(entry);
+    : buildSpecificTitle(entry, originalTitle, profile);
 
   const localizedSummary = buildLocalizedSummary(entry, profile, originalSummary);
   const description = buildLocalizedDescription(
@@ -632,6 +774,7 @@ function localizeSkillLikeEntry(entry: CatalogEntry): CatalogEntry {
     title: localizedTitle,
     summary: localizedSummary,
     description,
+    category: resolveCategory(entry, profile),
     originalTitle: localizedTitle === originalTitle ? entry.originalTitle : originalTitle,
     originalSummary:
       localizedSummary === originalSummary ? entry.originalSummary : originalSummary,

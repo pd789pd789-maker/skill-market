@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T09:49:54.637Z",
+  "generatedAt": "2026-07-06T12:54:53.564Z",
   "stale": true,
   "warning": "部分 GitHub 源同步失败，当前页面回退到最近一次成功快照。",
   "sources": [
@@ -7,10 +7,10 @@
       "id": "antigravity-json",
       "label": "Antigravity JSON Catalog",
       "sourceRepo": "sickn33/antigravity-awesome-skills",
-      "entryCount": 1902,
+      "entryCount": 1889,
       "status": "fallback",
-      "updatedAt": "2026-07-06T09:49:54.637Z",
-      "error": "The operation was aborted due to timeout"
+      "updatedAt": "2026-07-06T12:54:53.564Z",
+      "error": "GitHub request failed (403) for https://api.github.com/repos/sickn33/antigravity-awesome-skills"
     },
     {
       "id": "anthropics-manifest",
@@ -18,17 +18,17 @@
       "sourceRepo": "anthropics/skills",
       "entryCount": 18,
       "status": "fallback",
-      "updatedAt": "2026-07-06T09:49:54.637Z",
-      "error": "The operation was aborted due to timeout"
+      "updatedAt": "2026-07-06T12:54:53.564Z",
+      "error": "GitHub request failed (403) for https://api.github.com/repos/anthropics/skills"
     },
     {
       "id": "openai-plugin-manifest",
       "label": "OpenAI Plugin Manifest",
       "sourceRepo": "openai/plugins",
-      "entryCount": 183,
+      "entryCount": 181,
       "status": "fallback",
-      "updatedAt": "2026-07-06T09:49:54.637Z",
-      "error": "The operation was aborted due to timeout"
+      "updatedAt": "2026-07-06T12:54:53.564Z",
+      "error": "GitHub request failed (403) for https://api.github.com/repos/openai/plugins"
     },
     {
       "id": "voltagent-readme",
@@ -36,8 +36,8 @@
       "sourceRepo": "VoltAgent/awesome-agent-skills",
       "entryCount": 584,
       "status": "fallback",
-      "updatedAt": "2026-07-06T09:49:54.637Z",
-      "error": "The operation was aborted due to timeout"
+      "updatedAt": "2026-07-06T12:54:53.564Z",
+      "error": "GitHub request failed (403) for https://api.github.com/repos/VoltAgent/awesome-agent-skills"
     },
     {
       "id": "composio-readme",
@@ -45,8 +45,8 @@
       "sourceRepo": "ComposioHQ/awesome-codex-skills",
       "entryCount": 13,
       "status": "fallback",
-      "updatedAt": "2026-07-06T09:49:54.637Z",
-      "error": "The operation was aborted due to timeout"
+      "updatedAt": "2026-07-06T12:54:53.564Z",
+      "error": "GitHub request failed (403) for https://api.github.com/repos/ComposioHQ/awesome-codex-skills"
     }
   ]
 }

@@ -3,6 +3,8 @@ import {
   fetchGitHubText,
   fetchRepoMeta,
   fetchRepoTree,
+  normalizeGitHubComparableUrl,
+  normalizeGitHubUrl,
   parseGitHubRepo,
   rawGitHubUrl,
   repoTreeUrl,
@@ -89,6 +91,52 @@ function normalizePlatforms(input: string[] | undefined, fallback: Platform[]): 
   return unique(mapped.length > 0 ? mapped : fallback);
 }
 
+function buildCanonicalId(url: string, fallback: string): string {
+  return normalizeGitHubComparableUrl(url) ?? fallback.toLowerCase();
+}
+
+function normalizeSourceTag(source: string | undefined): string {
+  if (!source) {
+    return "community";
+  }
+
+  const repo = parseGitHubRepo(source);
+  if (repo) {
+    return repo;
+  }
+
+  try {
+    const hostname = new URL(source).hostname.replace(/^www\./i, "");
+    if (hostname) {
+      return hostname;
+    }
+  } catch {
+    // fall through to the raw source label
+  }
+
+  return source;
+}
+
+function resolveGitHubSourceDetails(
+  source: string | undefined,
+): { repoUrl?: string; downloadUrl?: string; canonicalId?: string } {
+  if (!source) {
+    return {};
+  }
+
+  const normalizedUrl = normalizeGitHubUrl(source);
+  if (!normalizedUrl) {
+    return {};
+  }
+
+  const repo = parseGitHubRepo(normalizedUrl);
+  return {
+    repoUrl: repo ? `https://github.com/${repo}` : normalizedUrl,
+    downloadUrl: normalizedUrl,
+    canonicalId: buildCanonicalId(normalizedUrl, normalizedUrl),
+  };
+}
+
 function buildCollectionEntry(options: {
   slug: string;
   title: string;
@@ -108,6 +156,7 @@ function buildCollectionEntry(options: {
     kind: "collection",
     title: options.title,
     summary: options.summary,
+    category: "合集与来源",
     sourceRepo: options.sourceRepo,
     repoUrl: options.repoUrl,
     downloadUrl: options.repoUrl,
@@ -170,6 +219,7 @@ async function normalizeAntigravity(
     const targets = Object.entries(item.plugin?.targets ?? {})
       .filter(([, status]) => status === "supported")
       .map(([platform]) => platform);
+    const sourceDetails = resolveGitHubSourceDetails(item.source);
 
     return {
       slug: ensureSlug(item.id || item.name, item.id),
@@ -177,10 +227,11 @@ async function normalizeAntigravity(
       title: item.name.replace(/[-_]/g, " "),
       summary: item.description?.trim() || "来自 Antigravity 索引的社区 Skill。",
       sourceRepo: repo,
-      repoUrl: raw.meta.htmlUrl,
-      downloadUrl: repoTreeUrl(repo, raw.meta.defaultBranch, item.path),
+      repoUrl: sourceDetails.repoUrl ?? raw.meta.htmlUrl,
+      downloadUrl:
+        sourceDetails.downloadUrl ?? repoTreeUrl(repo, raw.meta.defaultBranch, item.path),
       platforms: normalizePlatforms(targets, ["codex", "claude"]),
-      tags: normalizeTags([item.category ?? "other", item.source ?? "community"]),
+      tags: normalizeTags([item.category ?? "other", normalizeSourceTag(item.source)]),
       officialStatus: item.source === "personal" ? "curated" : "community",
       deprecated: false,
       stars: raw.meta.stargazersCount,
@@ -191,6 +242,13 @@ async function normalizeAntigravity(
         item.plugin?.setup?.type === "none"
           ? ["copy-folder"]
           : ["installer-script", "copy-folder"],
+      canonicalId:
+        sourceDetails.canonicalId ??
+        buildCanonicalId(
+          repoTreeUrl(repo, raw.meta.defaultBranch, item.path),
+          `${repo}:${item.path}`,
+        ),
+      sourceRepos: [repo],
       path: item.path,
     };
   });
@@ -252,6 +310,7 @@ async function normalizeAnthropic(raw: ManifestRaw): Promise<CatalogEntry[]> {
       sourceRepo: repo,
       repoUrl: raw.meta.htmlUrl,
       downloadUrl: repoTreeUrl(repo, raw.branch, path.replace("/SKILL.md", "")),
+      category: "Agent 工作流",
       platforms: ["claude"],
       tags: normalizeTags([folder, "official", "anthropic"]),
       officialStatus: "official",
@@ -259,6 +318,11 @@ async function normalizeAnthropic(raw: ManifestRaw): Promise<CatalogEntry[]> {
       stars: raw.meta.stargazersCount,
       updatedAt: raw.meta.pushedAt,
       installMethods: ["copy-folder"],
+      canonicalId: buildCanonicalId(
+        repoTreeUrl(repo, raw.branch, path.replace("/SKILL.md", "")),
+        `${repo}:${path}`,
+      ),
+      sourceRepos: [repo],
       path,
     };
   });
@@ -306,6 +370,7 @@ async function normalizeOpenAIPlugins(raw: ManifestRaw): Promise<CatalogEntry[]>
       sourceRepo: repo,
       repoUrl: raw.meta.htmlUrl,
       downloadUrl: repoTreeUrl(repo, raw.branch, path.replace("/.codex-plugin/plugin.json", "")),
+      category: "插件与工具集成",
       platforms: ["codex"],
       tags: normalizeTags([...(manifest.keywords ?? []), folder, "official"]),
       officialStatus: "official",
@@ -313,6 +378,11 @@ async function normalizeOpenAIPlugins(raw: ManifestRaw): Promise<CatalogEntry[]>
       stars: raw.meta.stargazersCount,
       updatedAt: raw.meta.pushedAt,
       installMethods: ["plugin-marketplace", "copy-folder"],
+      canonicalId: buildCanonicalId(
+        repoTreeUrl(repo, raw.branch, path.replace("/.codex-plugin/plugin.json", "")),
+        `${repo}:${path}`,
+      ),
+      sourceRepos: [repo],
       path,
     };
   });
@@ -392,8 +462,8 @@ function parseReadmeBullets(
       title,
       summary,
       sourceRepo,
-      repoUrl: repo ? `https://github.com/${repo}` : url,
-      downloadUrl: url,
+      repoUrl: repo ? `https://github.com/${repo}` : normalizeGitHubUrl(url) ?? url,
+      downloadUrl: normalizeGitHubUrl(url) ?? url,
       platforms: ["codex", "claude", "cursor", "gemini", "multi-agent"],
       tags,
       officialStatus: /official|team|openai|anthropic/i.test(currentSection)
@@ -405,6 +475,11 @@ function parseReadmeBullets(
       installMethods: url.includes("/releases")
         ? ["github-release"]
         : ["copy-folder"],
+      canonicalId: buildCanonicalId(
+        normalizeGitHubUrl(url) ?? url,
+        `${sourceRepo}:${title}`,
+      ),
+      sourceRepos: [sourceRepo],
     });
   }
 
@@ -497,7 +572,10 @@ export const openaiPluginsAdapter: SourceAdapter<ManifestRaw> = {
   fetch: (context) =>
     fetchManifestSource(
       "openai/plugins",
-      (path) => path.endsWith("/.codex-plugin/plugin.json"),
+      (path) =>
+        path.startsWith("plugins/") &&
+        !path.includes("/fixtures/") &&
+        path.endsWith("/.codex-plugin/plugin.json"),
       context,
     ),
   normalize: normalizeOpenAIPlugins,

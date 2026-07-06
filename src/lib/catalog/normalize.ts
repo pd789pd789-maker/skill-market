@@ -49,8 +49,25 @@ function entryPriority(entry: CatalogEntry): number {
 }
 
 function normalizeKey(entry: CatalogEntry): string {
+  if (entry.canonicalId) {
+    return `${entry.kind}:${entry.canonicalId.toLowerCase()}`;
+  }
+
   const pathKey = entry.path ? `#${entry.path}` : "";
   return `${entry.kind}:${entry.downloadUrl.toLowerCase()}${pathKey}`;
+}
+
+function normalizeMirrorKey(entry: CatalogEntry): string | null {
+  if (entry.kind === "collection") {
+    return null;
+  }
+
+  const titleKey = ensureSlug(entry.originalTitle ?? entry.title, entry.slug);
+  if (!titleKey) {
+    return null;
+  }
+
+  return `${entry.kind}:${entry.slug}:${titleKey}`;
 }
 
 function mergeEntries(base: CatalogEntry, incoming: CatalogEntry): CatalogEntry {
@@ -60,9 +77,11 @@ function mergeEntries(base: CatalogEntry, incoming: CatalogEntry): CatalogEntry 
 
   return {
     ...primary,
+    category: primary.category ?? secondary.category ?? getPrimaryCategory([...base.tags, ...incoming.tags]),
     platforms: unique([...base.platforms, ...incoming.platforms]),
     tags: normalizeTags([...base.tags, ...incoming.tags]),
     installMethods: unique([...base.installMethods, ...incoming.installMethods]),
+    canonicalId: primary.canonicalId ?? secondary.canonicalId,
     sourceRepos: unique([
       ...(base.sourceRepos ?? [base.sourceRepo]),
       ...(incoming.sourceRepos ?? [incoming.sourceRepo]),
@@ -96,13 +115,79 @@ export function dedupeEntries(entries: CatalogEntry[]): CatalogEntry[] {
     map.set(key, current ? mergeEntries(current, entry) : entry);
   }
 
-  return [...map.values()].sort((left, right) => {
+  const mirrorMerged = new Map<string, CatalogEntry>();
+
+  for (const entry of map.values()) {
+    const mirrorKey = normalizeMirrorKey(entry);
+    if (!mirrorKey) {
+      mirrorMerged.set(`${entry.kind}:${entry.slug}:${entry.downloadUrl}`, entry);
+      continue;
+    }
+
+    const current = mirrorMerged.get(mirrorKey);
+    mirrorMerged.set(mirrorKey, current ? mergeEntries(current, entry) : entry);
+  }
+
+  return [...mirrorMerged.values()].sort((left, right) => {
     if ((right.stars ?? 0) !== (left.stars ?? 0)) {
       return (right.stars ?? 0) - (left.stars ?? 0);
     }
     return (
       new Date(right.updatedAt).getTime() - new Date(left.updatedAt).getTime()
     );
+  });
+}
+
+function buildUniqueSlug(entry: CatalogEntry, taken: Set<string>): string {
+  const candidates = [
+    `${entry.slug}-${entry.kind}`,
+    `${entry.slug}-${entry.kind}-${ensureSlug(entry.sourceRepo.split("/").pop() ?? entry.sourceRepo, entry.kind)}`,
+    `${entry.slug}-${ensureSlug(entry.repoUrl.split("/").pop() ?? entry.kind, entry.kind)}`,
+  ];
+
+  for (const candidate of candidates) {
+    if (!taken.has(candidate)) {
+      return candidate;
+    }
+  }
+
+  let counter = 2;
+  while (taken.has(`${entry.slug}-${entry.kind}-${counter}`)) {
+    counter += 1;
+  }
+  return `${entry.slug}-${entry.kind}-${counter}`;
+}
+
+export function ensureUniqueSlugs(entries: CatalogEntry[]): CatalogEntry[] {
+  const groups = new Map<string, CatalogEntry[]>();
+
+  for (const entry of entries) {
+    groups.set(entry.slug, [...(groups.get(entry.slug) ?? []), entry]);
+  }
+
+  const taken = new Set<string>();
+
+  return entries.map((entry) => {
+    const group = groups.get(entry.slug) ?? [];
+    if (group.length === 1 && !taken.has(entry.slug)) {
+      taken.add(entry.slug);
+      return entry;
+    }
+
+    const sortedGroup = [...group].sort((left, right) => entryPriority(right) - entryPriority(left));
+    const preferred = sortedGroup[0];
+
+    if (preferred === entry && !taken.has(entry.slug)) {
+      taken.add(entry.slug);
+      return entry;
+    }
+
+    const nextSlug = buildUniqueSlug(entry, taken);
+    taken.add(nextSlug);
+    return {
+      ...entry,
+      slug: nextSlug,
+    };
   });
 }
 
@@ -115,7 +200,9 @@ export function buildSearchIndex(entries: CatalogEntry[]): SearchEntry[] {
       title: entry.title,
       summary: entry.summary,
       description: entry.description,
+      category: entry.category,
       sourceRepo: entry.sourceRepo,
+      sourceRepos: entry.sourceRepos,
       downloadUrl: entry.downloadUrl,
       platforms: entry.platforms,
       tags: entry.tags,
@@ -130,9 +217,11 @@ export function buildSearchIndex(entries: CatalogEntry[]): SearchEntry[] {
         entry.title,
         entry.summary,
         entry.description,
+        entry.category,
         entry.originalTitle,
         entry.originalSummary,
         entry.sourceRepo,
+        ...(entry.sourceRepos ?? []),
         ...entry.tags,
         ...entry.platforms,
       ]
@@ -274,11 +363,13 @@ export function filterSearchEntries(
       }
     }
 
-    if (filters.tag && !entry.tags.includes(filters.tag)) {
+    const entryCategory = entry.category ?? getPrimaryCategory(entry.tags);
+    if (filters.tag && entryCategory !== filters.tag) {
       return false;
     }
 
-    if (filters.sourceRepo && entry.sourceRepo !== filters.sourceRepo) {
+    const sourceRepos = entry.sourceRepos ?? [entry.sourceRepo];
+    if (filters.sourceRepo && !sourceRepos.includes(filters.sourceRepo)) {
       return false;
     }
 
@@ -298,21 +389,27 @@ export function getFacetSummary(entries: SearchEntry[]) {
   const byPlatform = new Map<Platform, number>();
   const bySource = new Map<string, number>();
   const byTag = new Map<string, number>();
+  const byCategory = new Map<string, number>();
 
   for (const entry of entries) {
     for (const platform of entry.platforms) {
       byPlatform.set(platform, (byPlatform.get(platform) ?? 0) + 1);
     }
-    bySource.set(entry.sourceRepo, (bySource.get(entry.sourceRepo) ?? 0) + 1);
+    for (const sourceRepo of entry.sourceRepos ?? [entry.sourceRepo]) {
+      bySource.set(sourceRepo, (bySource.get(sourceRepo) ?? 0) + 1);
+    }
     for (const tag of entry.tags) {
       byTag.set(tag, (byTag.get(tag) ?? 0) + 1);
     }
+    const category = entry.category ?? getPrimaryCategory(entry.tags);
+    byCategory.set(category, (byCategory.get(category) ?? 0) + 1);
   }
 
   return {
     byPlatform,
     bySource,
     byTag,
+    byCategory,
   };
 }
 
