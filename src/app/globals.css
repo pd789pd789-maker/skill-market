@@ -8,6 +8,10 @@
   --border: rgba(148, 163, 184, 0.22);
   --blue: #2563eb;
   --mint: #0f766e;
+  --font-body: "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC",
+    "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-display: "Avenir Next", "SF Pro Display", "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", sans-serif;
 }
 
 @theme inline {

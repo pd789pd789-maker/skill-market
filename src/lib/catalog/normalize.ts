@@ -76,6 +76,14 @@ function mergeEntries(base: CatalogEntry, incoming: CatalogEntry): CatalogEntry 
       primary.summary.length >= secondary.summary.length
         ? primary.summary
         : secondary.summary,
+    description:
+      primary.description && secondary.description
+        ? primary.description.length >= secondary.description.length
+          ? primary.description
+          : secondary.description
+        : primary.description ?? secondary.description,
+    originalTitle: base.originalTitle ?? incoming.originalTitle,
+    originalSummary: base.originalSummary ?? incoming.originalSummary,
   };
 }
 
@@ -106,6 +114,7 @@ export function buildSearchIndex(entries: CatalogEntry[]): SearchEntry[] {
       kind: entry.kind,
       title: entry.title,
       summary: entry.summary,
+      description: entry.description,
       sourceRepo: entry.sourceRepo,
       downloadUrl: entry.downloadUrl,
       platforms: entry.platforms,
@@ -115,13 +124,19 @@ export function buildSearchIndex(entries: CatalogEntry[]): SearchEntry[] {
       stars: entry.stars,
       updatedAt: entry.updatedAt,
       installMethods: entry.installMethods,
+      originalTitle: entry.originalTitle,
+      originalSummary: entry.originalSummary,
       searchText: [
         entry.title,
         entry.summary,
+        entry.description,
+        entry.originalTitle,
+        entry.originalSummary,
         entry.sourceRepo,
         ...entry.tags,
         ...entry.platforms,
       ]
+        .filter(Boolean)
         .join(" ")
         .toLowerCase(),
     }));

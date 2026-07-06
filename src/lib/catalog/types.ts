@@ -30,6 +30,7 @@ export interface CatalogEntry {
   kind: CatalogKind;
   title: string;
   summary: string;
+  description?: string;
   sourceRepo: string;
   repoUrl: string;
   downloadUrl: string;
@@ -41,6 +42,8 @@ export interface CatalogEntry {
   updatedAt: string;
   installMethods: InstallMethod[];
   sourceRepos?: string[];
+  originalTitle?: string;
+  originalSummary?: string;
   path?: string;
 }
 
@@ -49,6 +52,7 @@ export interface SearchEntry {
   kind: CatalogKind;
   title: string;
   summary: string;
+  description?: string;
   sourceRepo: string;
   downloadUrl: string;
   platforms: Platform[];
@@ -58,6 +62,8 @@ export interface SearchEntry {
   stars: number | null;
   updatedAt: string;
   installMethods: InstallMethod[];
+  originalTitle?: string;
+  originalSummary?: string;
   searchText: string;
 }
 

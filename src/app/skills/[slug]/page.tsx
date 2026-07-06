@@ -53,6 +53,11 @@ export default async function SkillDetailPage({
                   <h1 className="text-4xl font-black tracking-tight text-slate-950">
                     {entry.title}
                   </h1>
+                  {entry.originalTitle ? (
+                    <p className="text-sm font-medium text-slate-400">
+                      原始名称: {entry.originalTitle}
+                    </p>
+                  ) : null}
                   <p className="text-lg leading-8 text-slate-600">{entry.summary}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -93,33 +98,49 @@ export default async function SkillDetailPage({
           </section>
 
           <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-            <section className="rounded-[30px] border border-slate-200 bg-white p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-slate-500">安装方式</p>
-                  <h2 className="mt-1 text-2xl font-black tracking-tight text-slate-950">
-                    如何使用
-                  </h2>
-                </div>
-                <GitBranch className="h-5 w-5 text-slate-400" />
-              </div>
-
-              <div className="mt-5 space-y-4">
-                {entry.installMethods.map((method) => (
-                  <div
-                    key={method}
-                    className="rounded-[24px] border border-slate-200 bg-slate-50 p-4"
-                  >
-                    <p className="text-sm font-bold text-slate-900">
-                      {INSTALL_METHOD_LABELS[method]}
-                    </p>
-                    <pre className="mt-3 overflow-x-auto rounded-[18px] bg-white p-4 text-sm leading-7 text-slate-700 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.18)]">
-                      <code>{exampleInstallSnippet(entry.slug, method)}</code>
-                    </pre>
+            <div className="space-y-6">
+              <section className="rounded-[30px] border border-slate-200 bg-white p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-500">功能说明</p>
+                    <h2 className="mt-1 text-2xl font-black tracking-tight text-slate-950">
+                      这个 Skill 能做什么
+                    </h2>
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
+                <p className="mt-5 text-base leading-8 text-slate-600">
+                  {entry.description ?? entry.summary}
+                </p>
+              </section>
+
+              <section className="rounded-[30px] border border-slate-200 bg-white p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-slate-500">安装方式</p>
+                    <h2 className="mt-1 text-2xl font-black tracking-tight text-slate-950">
+                      如何使用
+                    </h2>
+                  </div>
+                  <GitBranch className="h-5 w-5 text-slate-400" />
+                </div>
+
+                <div className="mt-5 space-y-4">
+                  {entry.installMethods.map((method) => (
+                    <div
+                      key={method}
+                      className="rounded-[24px] border border-slate-200 bg-slate-50 p-4"
+                    >
+                      <p className="text-sm font-bold text-slate-900">
+                        {INSTALL_METHOD_LABELS[method]}
+                      </p>
+                      <pre className="mt-3 overflow-x-auto rounded-[18px] bg-white p-4 text-sm leading-7 text-slate-700 shadow-[inset_0_0_0_1px_rgba(148,163,184,0.18)]">
+                        <code>{exampleInstallSnippet(entry.slug, method)}</code>
+                      </pre>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
 
             <section className="space-y-6">
               <div className="rounded-[30px] border border-slate-200 bg-white p-6">

@@ -5,6 +5,7 @@ import {
   createFallbackStatus,
   filterFallbackEntries,
 } from "../src/lib/catalog/fallback";
+import { localizeCatalogEntries } from "../src/lib/catalog/localize";
 import { buildSearchIndex, createCatalogMeta, dedupeEntries } from "../src/lib/catalog/normalize";
 import { SOURCE_ADAPTERS } from "../src/lib/catalog/source-adapters";
 import type {
@@ -81,16 +82,17 @@ async function run(): Promise<void> {
   }
 
   const deduped = dedupeEntries(nextEntries);
+  const localized = localizeCatalogEntries(deduped);
 
-  if (deduped.length === 0) {
+  if (localized.length === 0) {
     throw new Error("Catalog sync produced zero entries and no fallback snapshot was available.");
   }
 
   const meta: CatalogMeta = createCatalogMeta(generatedAt, sourceStatuses);
-  const searchIndex = buildSearchIndex(deduped);
+  const searchIndex = buildSearchIndex(localized);
 
   await Promise.all([
-    writeFile(fullCatalogPath, `${JSON.stringify(deduped, null, 2)}\n`, "utf8"),
+    writeFile(fullCatalogPath, `${JSON.stringify(localized, null, 2)}\n`, "utf8"),
     writeFile(searchCatalogPath, `${JSON.stringify(searchIndex, null, 2)}\n`, "utf8"),
     writeFile(metaCatalogPath, `${JSON.stringify(meta, null, 2)}\n`, "utf8"),
   ]);
@@ -98,7 +100,7 @@ async function run(): Promise<void> {
   const freshCount = sourceStatuses.filter((source) => source.status === "fresh").length;
   const fallbackCount = sourceStatuses.length - freshCount;
   console.log(
-    `Skill Atlas catalog synced: ${deduped.length} entries from ${freshCount} fresh source(s)` +
+    `Skill Atlas catalog synced: ${localized.length} entries from ${freshCount} fresh source(s)` +
       (fallbackCount > 0 ? `, ${fallbackCount} fallback source(s)` : ""),
   );
 }
