@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T12:54:53.564Z",
+  "generatedAt": "2026-07-07T06:17:42.979Z",
   "stale": true,
   "warning": "部分 GitHub 源同步失败，当前页面回退到最近一次成功快照。",
   "sources": [
@@ -9,44 +9,40 @@
       "sourceRepo": "sickn33/antigravity-awesome-skills",
       "entryCount": 1889,
       "status": "fallback",
-      "updatedAt": "2026-07-06T12:54:53.564Z",
-      "error": "GitHub request failed (403) for https://api.github.com/repos/sickn33/antigravity-awesome-skills"
+      "updatedAt": "2026-07-07T06:17:42.979Z",
+      "error": "GitHub contents API did not return base64 content for sickn33/antigravity-awesome-skills/skills_index.json"
     },
     {
       "id": "anthropics-manifest",
       "label": "Anthropic Skill Manifest",
       "sourceRepo": "anthropics/skills",
       "entryCount": 18,
-      "status": "fallback",
-      "updatedAt": "2026-07-06T12:54:53.564Z",
-      "error": "GitHub request failed (403) for https://api.github.com/repos/anthropics/skills"
+      "status": "fresh",
+      "updatedAt": "2026-07-07T06:17:42.979Z"
     },
     {
       "id": "openai-plugin-manifest",
       "label": "OpenAI Plugin Manifest",
       "sourceRepo": "openai/plugins",
-      "entryCount": 181,
-      "status": "fallback",
-      "updatedAt": "2026-07-06T12:54:53.564Z",
-      "error": "GitHub request failed (403) for https://api.github.com/repos/openai/plugins"
+      "entryCount": 182,
+      "status": "fresh",
+      "updatedAt": "2026-07-07T06:17:42.979Z"
     },
     {
       "id": "voltagent-readme",
       "label": "VoltAgent README Catalog",
       "sourceRepo": "VoltAgent/awesome-agent-skills",
-      "entryCount": 584,
-      "status": "fallback",
-      "updatedAt": "2026-07-06T12:54:53.564Z",
-      "error": "GitHub request failed (403) for https://api.github.com/repos/VoltAgent/awesome-agent-skills"
+      "entryCount": 587,
+      "status": "fresh",
+      "updatedAt": "2026-07-07T06:17:42.979Z"
     },
     {
       "id": "composio-readme",
       "label": "Composio README Catalog",
       "sourceRepo": "ComposioHQ/awesome-codex-skills",
       "entryCount": 13,
-      "status": "fallback",
-      "updatedAt": "2026-07-06T12:54:53.564Z",
-      "error": "GitHub request failed (403) for https://api.github.com/repos/ComposioHQ/awesome-codex-skills"
+      "status": "fresh",
+      "updatedAt": "2026-07-07T06:17:42.979Z"
     }
   ]
 }
