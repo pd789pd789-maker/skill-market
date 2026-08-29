@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T14:18:24.769Z",
+  "generatedAt": "2026-08-29T08:59:16.472Z",
   "stale": true,
   "warning": "部分 GitHub 源同步失败，当前页面回退到最近一次成功快照。",
   "sources": [
@@ -9,7 +9,7 @@
       "sourceRepo": "sickn33/antigravity-awesome-skills",
       "entryCount": 1889,
       "status": "fallback",
-      "updatedAt": "2026-08-28T14:18:24.769Z",
+      "updatedAt": "2026-08-29T08:59:16.472Z",
       "error": "GitHub contents API did not return base64 content for sickn33/antigravity-awesome-skills/skills_index.json"
     },
     {
@@ -18,7 +18,7 @@
       "sourceRepo": "anthropics/skills",
       "entryCount": 20,
       "status": "fresh",
-      "updatedAt": "2026-08-28T14:18:24.769Z"
+      "updatedAt": "2026-08-29T08:59:16.472Z"
     },
     {
       "id": "openai-plugin-manifest",
@@ -26,7 +26,7 @@
       "sourceRepo": "openai/plugins",
       "entryCount": 64,
       "status": "fresh",
-      "updatedAt": "2026-08-28T14:18:24.769Z"
+      "updatedAt": "2026-08-29T08:59:16.472Z"
     },
     {
       "id": "voltagent-readme",
@@ -34,7 +34,7 @@
       "sourceRepo": "VoltAgent/awesome-agent-skills",
       "entryCount": 636,
       "status": "fresh",
-      "updatedAt": "2026-08-28T14:18:24.769Z"
+      "updatedAt": "2026-08-29T08:59:16.472Z"
     },
     {
       "id": "composio-readme",
@@ -42,7 +42,7 @@
       "sourceRepo": "ComposioHQ/awesome-codex-skills",
       "entryCount": 14,
       "status": "fresh",
-      "updatedAt": "2026-08-28T14:18:24.769Z"
+      "updatedAt": "2026-08-29T08:59:16.472Z"
     }
   ]
 }
